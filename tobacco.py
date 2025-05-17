@@ -46,6 +46,7 @@ risk_weights = {
 # subtracting 100 as a normalization step
 tobacco_risk_index_1995 = np.round(tobacco_1995[list(risk_weights)].mul(pd.Series(risk_weights)).sum(axis=1)) - 100
 tobacco_risk_index_2010 = np.round(tobacco_2010[list(risk_weights)].mul(pd.Series(risk_weights)).sum(axis=1)) - 100
+tabacco_risk_index_change = np.round(tobacco_risk_index_2010 - tobacco_risk_index_1995)
 
 us_states = np.asarray(['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA',
                         'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA',
@@ -63,7 +64,7 @@ data = [dict(
         showscale = True,
         locations = us_states,
         locationmode = 'USA-states',
-        z = tobacco_risk_index_2010,
+        z = tabacco_risk_index_change,
         marker = dict(
             line = dict(
                 color = 'rgb(255, 255, 255)',
@@ -76,7 +77,7 @@ data.append(dict(
         type = 'scattergeo',
         locations = us_states,
         locationmode = 'USA-states',
-        text = tobacco_risk_index_2010,
+        text = tabacco_risk_index_change,
         mode = 'text',
         textposition = 'middle center',
         textfont = dict(
@@ -86,7 +87,7 @@ data.append(dict(
         ))
 
 layout = dict(
-            title = 'Tobacco-Weighted Mortality Risk Index in 2010',
+            title = 'Tobacco-Weighted Mortality Risk Index Change in 1995-2010',
             height = 600,
             geo = dict(
                 scope = 'usa',
